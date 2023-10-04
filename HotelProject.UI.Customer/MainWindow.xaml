@@ -1,0 +1,31 @@
+﻿<Window x:Class="HotelProject.UI.Customer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelProject.UI.Customer"
+        mc:Ignorable="d"
+        Title="Customer Management" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="0" Grid.Column="0" Name="SearchTextBox" Margin="5"/>
+        <Button Grid.Row="0" Grid.Column="1" Name="SearchButton" Margin="5" Content="Search" Click="SearchButton_Click"/>
+        <DataGrid Name="CustomerDataGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" IsReadOnly="True" >
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add" Click="MenuItemAddCustomer_Click"></MenuItem>
+                    <MenuItem Header="Delete" Click="MenuItemDeleteCustomer_Click"></MenuItem>
+                    <MenuItem Header="Update" Click="MenuItemUpdateCustomer_Click"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+    
+</Window>
