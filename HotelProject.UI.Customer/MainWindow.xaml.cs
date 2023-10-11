@@ -1,9 +1,12 @@
 ﻿using HotelProject.BL.Managers;
 using HotelProject.BL.Model;
 using HotelProject.DL.Repositories;
-using HotelProject.UI.Customer.Model;
+using HotelProject.UI.CustomerWPF.Model;
+using HotelProject.Util;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HotelProject.UI.Customer
+namespace HotelProject.UI.CustomerWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -25,22 +28,25 @@ namespace HotelProject.UI.Customer
     public partial class MainWindow : Window
     {
         private CustomerManager customerManager;
-        private string connectionString = "Data Source=NB21-6CDPYD3\\SQLEXPRESS;Initial Catalog=HotelWoensdag;Integrated Security=True";
+        private ObservableCollection<CustomerUI> customersUIs=new ObservableCollection<CustomerUI>();
         public MainWindow()
         {
             InitializeComponent();
-            customerManager = new CustomerManager(new CustomerRepositoryADO(connectionString));            
-            CustomerDataGrid.ItemsSource = new List<CustomerUI>(customerManager.GetCustomers(null).Select(x => new CustomerUI(x.Id, x.Name, x.ContactInfo.Email, x.ContactInfo.Phone, x.ContactInfo.Address.ToString(), x.GetMembers().Count)));
+            customerManager = new CustomerManager(RepositoryFactory.CustomerRepository);       
+            customersUIs= new ObservableCollection<CustomerUI>(customerManager.GetCustomers(null).Select(x => new CustomerUI(x.Id, x.Name, x.ContactInfo.Email, x.ContactInfo.Phone, x.ContactInfo.Address.ToString(), x.GetMembers().Count)));
+            CustomerDataGrid.ItemsSource = customersUIs;
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CustomerDataGrid.ItemsSource = new ObservableCollection<CustomerUI>(customerManager.GetCustomers(SearchTextBox.Text).Select(x => new CustomerUI(x.Id, x.Name, x.ContactInfo.Email, x.ContactInfo.Phone, x.ContactInfo.Address.ToString(), x.GetMembers().Count)));
         }
 
         private void MenuItemAddCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            CustomerWindow w = new CustomerWindow();
+            w.ShowDialog();
+            customersUIs.Add(w.customerUI);
         }
 
         private void MenuItemDeleteCustomer_Click(object sender, RoutedEventArgs e)

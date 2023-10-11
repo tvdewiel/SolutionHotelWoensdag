@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelProject.UI.Customer.Model
+namespace HotelProject.UI.CustomerWPF.Model
 {
     public class CustomerUI
     {

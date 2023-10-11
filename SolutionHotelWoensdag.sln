@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTestBL", "Console
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{03157B10-3E1E-4303-AF6A-DDEEDA87C5E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelProject.UI.Customer", "HotelProject.UI.Customer\HotelProject.UI.Customer.csproj", "{902C5D3A-475A-4849-8E44-5B887185EFEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelProject.UI.CustomerWPF", "HotelProject.UI.Customer\HotelProject.UI.CustomerWPF.csproj", "{902C5D3A-475A-4849-8E44-5B887185EFEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelProject.DL", "HotelProject.DL\HotelProject.DL.csproj", "{7B5B86A5-80F9-4EF7-AE5F-0B4FA6C522DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelProject.DL", "HotelProject.DL\HotelProject.DL.csproj", "{7B5B86A5-80F9-4EF7-AE5F-0B4FA6C522DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTestDL", "ConsoleAppTestDL\ConsoleAppTestDL.csproj", "{4EA2BFFA-7A75-4855-9173-25EC63C7F883}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTestDL", "ConsoleAppTestDL\ConsoleAppTestDL.csproj", "{4EA2BFFA-7A75-4855-9173-25EC63C7F883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelProject.Util", "HotelProject.Util\HotelProject.Util.csproj", "{6FC62280-AA79-47F1-BBBB-3B17D54C6FE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{4EA2BFFA-7A75-4855-9173-25EC63C7F883}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EA2BFFA-7A75-4855-9173-25EC63C7F883}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EA2BFFA-7A75-4855-9173-25EC63C7F883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FC62280-AA79-47F1-BBBB-3B17D54C6FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FC62280-AA79-47F1-BBBB-3B17D54C6FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FC62280-AA79-47F1-BBBB-3B17D54C6FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FC62280-AA79-47F1-BBBB-3B17D54C6FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
