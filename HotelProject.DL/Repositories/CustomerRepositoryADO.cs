@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,6 +60,53 @@ namespace HotelProject.DL.Repositories
             catch(Exception ex)
             {
                 throw new CustomerRepositoryException("GetCustomer",ex);
+            }
+        }
+        public void AddCustomer(Customer customer)
+        {
+            try
+            {
+                string SQL = "INSERT INTO Customer(name,email,phone,address,status) output INSERTED.ID VALUES(@name,@email,@phone,@address,@status) ";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    conn.Open();
+                    SqlTransaction transaction=conn.BeginTransaction();
+                    try
+                    {
+                        //write customer table
+                        cmd.CommandText = SQL;
+                        cmd.Transaction = transaction;
+                        cmd.Parameters.AddWithValue("@name", customer.Name);
+                        cmd.Parameters.AddWithValue("@email", customer.ContactInfo.Email);
+                        cmd.Parameters.AddWithValue("@phone", customer.ContactInfo.Phone);
+                        cmd.Parameters.AddWithValue("@address", customer.ContactInfo.Address.ToAddressLine());
+                        cmd.Parameters.AddWithValue("@status", 1);
+                        int id=(int)cmd.ExecuteScalar();
+                        //write members table
+                        SQL = "INSERT INTO member(name,birthday,customerid,status) VALUES(@name,@birthday,@customerid,@status) ";
+                        cmd.CommandText=SQL;
+                        
+                        foreach(Member member in customer.GetMembers())
+                        {
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@name",member.Name);
+                            cmd.Parameters.AddWithValue("@birthday", member.BirthDay.ToDateTime(TimeOnly.MinValue));
+                            cmd.Parameters.AddWithValue("@customerid", id);
+                            cmd.Parameters.AddWithValue("@status", 1);
+                            cmd.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch(Exception ex)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new CustomerRepositoryException("AddCustomer", ex);
             }
         }
     }

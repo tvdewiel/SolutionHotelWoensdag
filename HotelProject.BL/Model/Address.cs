@@ -16,7 +16,6 @@ namespace HotelProject.BL.Model
             HouseNumber = houseNumber;
             Street = street;
         }
-
         public Address(string addressLine)
         {
             string[] parts = addressLine.Split(new char[] { '|' });
@@ -37,6 +36,10 @@ namespace HotelProject.BL.Model
         public override string ToString()
         {
             return $"({Municipality} [{ZipCode}] - {Street} - {HouseNumber})";
+        }
+        public string ToAddressLine()
+        {
+            return $"{Municipality}|{ZipCode}|{Street}|{HouseNumber}";
         }
     }
 }

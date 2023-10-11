@@ -44,9 +44,9 @@ namespace HotelProject.UI.CustomerWPF
 
         private void MenuItemAddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            CustomerWindow w = new CustomerWindow();
-            w.ShowDialog();
-            customersUIs.Add(w.customerUI);
+            CustomerWindow w = new CustomerWindow(false,null);
+            if (w.ShowDialog()==true)
+                customersUIs.Add(w.customerUI);
         }
 
         private void MenuItemDeleteCustomer_Click(object sender, RoutedEventArgs e)
@@ -56,7 +56,12 @@ namespace HotelProject.UI.CustomerWPF
 
         private void MenuItemUpdateCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            if (CustomerDataGrid.SelectedItem == null) MessageBox.Show("Customer not selected","Update");
+            else
+            {
+                CustomerWindow w = new CustomerWindow(true,(CustomerUI)CustomerDataGrid.SelectedItem);
+                w.ShowDialog();
+            }
         }
     }
 }
